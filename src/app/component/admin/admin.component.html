@@ -1,0 +1,62 @@
+<app-banner *ngIf="user.role =='admin'" b="Admin Dashboard"></app-banner>
+<app-banner *ngIf="user.role =='teacher'" b="Teacher Dashboard"></app-banner>
+<app-banner *ngIf="user.role =='student'" b="Student Dashboard"></app-banner>
+
+  <ul class="nav nav-pills nav-fill mb-3 container justify-content-center" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation" *ngIf="user.role =='admin'">
+      <button class="nav-link" id="pills-addClass-tab" data-bs-toggle="pill" data-bs-target="#pills-addClass" type="button" role="tab"><strong>Add Class</strong></button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-users-tab" data-bs-toggle="pill" data-bs-target="#pills-users" type="button" role="tab"
+      *ngIf="user.role =='admin'"><strong>Users</strong></button>
+      <button class="nav-link" id="pills-addCourse-tab" data-bs-toggle="pill" data-bs-target="#pills-addCourse" type="button" role="tab"
+      *ngIf="user.role =='teacher'"><strong>Add Course</strong></button>
+    </li>
+
+    <li class="nav-item" role="presentation" >
+      <button class="nav-link" id="pills-courses-tab" data-bs-toggle="pill" data-bs-target="#pills-courses" type="button" role="tab"
+      *ngIf="(user.role=='teacher' || user.role=='admin')"><strong>Courses</strong></button>
+      <button class="nav-link" id="pills-courses-tab" data-bs-toggle="pill" data-bs-target="#pills-courses" type="button" role="tab" style="margin-left: -38%;"
+      *ngIf="user.role=='student'"><strong>My Courses</strong></button>
+    </li>
+    <!-- <li class="nav-item justify-content-center" role="presentation" *ngIf="user.role =='student'">
+      <button class="nav-link" id="pills-courses-tab" data-bs-toggle="pill" data-bs-target="#pills-courses" type="button" role="tab"><strong>My Courses</strong></button>
+    </li> -->
+    <li class="nav-item" role="presentation" *ngIf="user.role!=='student'">
+      <button class="nav-link" id="pills-classes-tab" data-bs-toggle="pill" data-bs-target="#pills-classes" type="button" role="tab"><strong>Classes</strong></button>
+    </li>
+  </ul>
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade" id="pills-addClass" role="tabpanel" aria-labelledby="pills-addClass-tab">
+      <app-add-class></app-add-class>
+    </div>
+    <div class="tab-pane fade show active" id="pills-users" role="tabpanel" aria-labelledby="pills-users-tab" *ngIf="user.role =='admin'">
+        <nav class="nav-fill container mt-5">
+            <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-teachers-tab" data-bs-toggle="tab" data-bs-target="#nav-teachers" type="button" role="tab">Teachers</button>
+              <button class="nav-link" id="nav-students-tab" data-bs-toggle="tab" data-bs-target="#nav-students" type="button" role="tab">Students</button>
+              <button class="nav-link" id="nav-parents-tab" data-bs-toggle="tab" data-bs-target="#nav-parents" type="button" role="tab">Parents</button>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-teachers" role="tabpanel" aria-labelledby="nav-teachers-tab">
+                <app-teachers-tab></app-teachers-tab>
+            </div>
+            <div class="tab-pane fade" id="nav-students" role="tabpanel" aria-labelledby="nav-students-tab">
+              <app-students-tab></app-students-tab>
+            </div>
+            <div class="tab-pane fade" id="nav-parents" role="tabpanel" aria-labelledby="nav-parents-tab">
+              <app-parents-tab></app-parents-tab>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="pills-addCourse" role="tabpanel" aria-labelledby="pills-addCourse-tab" *ngIf="user.role =='teacher'">
+      <app-add-course></app-add-course>
+    </div>
+    <div class="tab-pane fade" id="pills-courses" role="tabpanel" aria-labelledby="pills-courses-tab">
+      <app-courses-tab></app-courses-tab>
+    </div>
+    <div class="tab-pane fade" id="pills-classes" role="tabpanel" aria-labelledby="pills-classes-tab">
+      <app-classes-tab></app-classes-tab>
+    </div>
+  </div>

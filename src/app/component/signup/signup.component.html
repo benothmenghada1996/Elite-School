@@ -1,0 +1,161 @@
+<app-banner b="Signup"></app-banner>
+<!-- Signup Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Join Us</h6>
+            <h1 class="mb-5">Create your account</h1>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-6 col-md-6 wow fadeInUp" >
+                <img class="img-fluid rounded position-relative h-100 w-100" src="assets/img/signup_1.jpg" alt="">
+            </div>
+            <div class="col-lg-6 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
+                <form [formGroup]="signupForm">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" formControlName="firstName" placeholder="First Name">
+                                <label for="firstName">First Name</label>
+                            </div>
+                            <div *ngIf ="signupForm.controls['firstName'].invalid && (signupForm.controls['firstName'].touched 
+                            || signupForm.controls['firstName'].dirty)">
+                                <div *ngIf ="signupForm.controls['firstName'].errors.required" class="text-danger">
+                                   First Name is required
+                                </div>
+                                <div *ngIf ="signupForm.controls['firstName'].errors.minlength" class="text-danger">
+                                  First Name must have at least 3 chars
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name">
+                                <label for="lastName">Last Name</label>
+                            </div>
+                            <div *ngIf ="signupForm.controls['lastName'].invalid && (signupForm.controls['lastName'].touched 
+                            || signupForm.controls['lastName'].dirty )">
+                                <div *ngIf ="signupForm.controls['lastName'].errors.required" class="text-danger">
+                                    Last Name is required
+                                </div>
+                                <div *ngIf ="signupForm.controls['lastName'].errors.minlength" class="text-danger">
+                                    Last Name must have at least 5 chars 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" formControlName="email" placeholder="Email">
+                                <label for="email">Email</label>
+                            </div>
+                            <div *ngIf="signupForm.controls['email'].invalid && (signupForm.controls['email'].touched 
+                            || signupForm.controls['email'].dirty)">
+                                <div *ngIf="signupForm.controls['email'].errors.required" class="text-danger">
+                                    Email is required
+                                </div>
+                                <div *ngIf="signupForm.controls['email'].errors.email" class="text-danger">
+                                    Please enter a valid email.
+                                </div>
+                            </div>
+                            <!-- <span style="color: red;">{{errorMsg}}</span> -->
+                        </div>
+                       
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" formControlName="tel" placeholder="Tel">
+                                <label for="tel">Tel</label>
+                            </div>
+                            <div *ngIf="signupForm.controls['tel'].invalid && (signupForm.controls['tel'].touched 
+                            || signupForm.controls['tel'].dirty)">
+                                <div *ngIf="signupForm.controls['tel'].errors.required" class="text-danger">
+                                    Tel is required
+                                </div>
+                            </div>
+                            <!-- <span style="color: red;">{{errorMsg}}</span> -->
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" formControlName="adress" placeholder="Adress">
+                                <label for="adress">Adress</label>
+                            </div>
+                            <div *ngIf="signupForm.controls['adress'].invalid && (signupForm.controls['adress'].touched 
+                            || signupForm.controls['adress'].dirty)">
+                                <div *ngIf="signupForm.controls['adress'].errors.required" class="text-danger">
+                                    Adress is required
+                                </div>
+                                <div *ngIf="signupForm.controls['adress'].errors.minlength" class="text-danger">
+                                    Adress must have at least 5 chars
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6"  *ngIf ="isSignup('Parent')">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" formControlName="sonTel" placeholder="Your Son Tel">
+                                <label for="sonTel">Your Son Tel</label>
+                            </div>
+                            <div *ngIf="signupForm.controls['sonTel'].invalid && (signupForm.controls['sonTel'].touched || signupForm.controls['sonTel'].dirty)">
+                                <div *ngIf="signupForm.controls['sonTel'].errors.required" class="text-danger">
+                                  Your Son Tel is required
+                                </div>
+                           </div>
+                           <!-- <span style="color: red;">{{telErrorMsg}}</span> -->
+                        </div>
+
+                        <div class="col-md-6" *ngIf ="isSignup('Teacher')">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" formControlName="speciality" placeholder="">
+                                <label for="speciality">Speciality</label>
+                            </div>
+                            <div *ngIf="signupForm.controls['speciality'].invalid && (signupForm.controls['speciality'].touched 
+                                || signupForm.controls['speciality'].dirty)">
+                                <div *ngIf="signupForm.controls['speciality'].errors.required" class="text-danger">
+                                    Speciality is required
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <input type="password" class="form-control" formControlName="pwd" placeholder="Password">
+                                <label for="pwd">Password</label>
+                            </div>
+                            <div *ngIf="signupForm.controls['pwd'].invalid && (signupForm.controls['pwd'].dirty 
+                            || signupForm.controls['pwd'].touched)">
+                              <div *ngIf="signupForm.controls['pwd'].errors.required" class="text-danger">Password is required</div>
+                              <div *ngIf="signupForm.controls['pwd'].errors.pattern" class="text-danger">
+                                Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character (!@#$%^&*)
+                              </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12" style="margin-top: -5px;"  *ngIf="isSignup('Teacher')">
+                            <div class="form-group" style="visibility: hidden;">
+                                <input type="file" class="form-control" #pdfPicker (change)="onPdfSelected($event)">
+                            </div>
+                            <div class="text-center">
+                               <button type="button" class="btn btn-primary" (click)="pdfPicker.click()">Upload Your CV</button>
+                            </div>
+                        </div>
+                        <div class="col-12" *ngIf="isSignup('Admin') || isSignup('Student')">
+                            <div class="form-group" style="visibility: hidden;">
+                                <input type="file" class="form-control" #imagePicker (change)="onImageSelected($event)">
+                            </div>
+                            <div class="text-center">
+                                <button type="button"  class="btn btn-primary"  (click)="imagePicker.click()">Select Your Avatar</button>
+                            </div>
+                        </div>
+                        <div class="mt-3 mb-3">
+                            <span style="color: red;">{{errorMsg}}</span>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100 py-3 mt-2" (click)="signup()" type="submit" >Signup Now</button>
+                        </div>
+                    </div>
+                </form>
+                <!-- <div class="mt-3">
+                    <span style="color: red;">{{errorMsg}}</span>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Signup End -->

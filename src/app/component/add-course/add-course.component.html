@@ -1,0 +1,49 @@
+
+<!-- Add Course Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">{{title}}</h6>
+            <h1 class="mb-5">{{title}}</h1>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-6 col-md-12 wow fadeInUp" data-wow-delay="0.5s" style="margin-left: 25%;">
+                <form #addCourseForm="ngForm" (ngSubmit)="addOrEditCourse()">
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name ="name" [(ngModel)]="course.name" placeholder="Name">
+                                <label for="name">Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name ="description" [(ngModel)]="course.description" placeholder="Description">
+                                <label for="lastName">Description</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name ="duration" [(ngModel)]="course.duration" placeholder="Duration">
+                                <label for="duration">Duration</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group" style="visibility: hidden;">
+                                <input type="file" class="form-control" #filePicker (change)="onImageSelected($event)">
+                            </div>
+                              <div class="text-center">
+                                <button type="button" class="btn btn-primary"  (click)="filePicker.click()">Upload Image</button><br>
+                                <img [src]="imagePreview" width="200px" alt="" class="pt-3">
+                              </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100 py-3" [disabled]="addCourseForm.invalid" type="submit">OK</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add Course  End -->

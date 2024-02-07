@@ -1,0 +1,106 @@
+<div class="site-section ">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center mt-5">
+          <h4 class=" text-primary" *ngIf="user.role =='teacher'">****** Student List For Course : {{course.name}} ****** </h4>
+          <div class="widget-next-match">
+            <table class="table custom-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Tel</th> 
+                  <th *ngIf="user.role =='teacher'">Email</th> 
+                  <th>Adress</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let student of students">
+                  <td>{{student._id}}</td>
+                  <td>{{student.firstName}}</td>
+                  <td>{{student.lastName}}</td>
+                  <td>{{student.tel}}</td>
+                  <td *ngIf="user.role =='teacher'">{{student.email}}</td> 
+                  <td>{{student.adress}}</td>
+                  <td><button type="button"  class="btn btn-primary rounded-pill me-2 " (click)="goToDispalyStudent(student._id)" *ngIf="user.role =='admin'">Display</button>
+                    
+                    <button type="button"  class="btn btn-success me-2 rounded-pill" (click)="saveStudentId(student._id)"
+                    data-bs-toggle="modal" data-bs-target="#affectModal" *ngIf="user.role =='admin'">AffectToClass</button>
+                      
+                    <div class="modal fade" id="affectModal" tabindex="-1" aria-labelledby="affectModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="affectModalLabel">Affect Student To Class</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <form>
+                                <div class="mb-3">
+                                  <label for="recipient-name" class="col-form-label">Select Class :</label>
+                                  <select class="form-control"  id="classId" (change)="selectClass($event)">
+                                    <option style ="color:grey" *ngFor="let class of classes" [value]="class._id">{{class.name}}</option>
+                                  </select>
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                  <div class="form-check form-check-inline" *ngFor="let course of coursesList">
+                                    <input class="form-check-input" type="checkbox" id="coursesId" (change)="checkCourse($event)" [value]="course._id" >
+                                    <label class="form-check-label" for="inlineCheckbox1">
+                                        {{course.name}}
+                                    </label>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" (click)="affectStudentToClass()">Save</button>
+                            </div>
+                          </div>
+                        </div>
+                    </div> 
+                    
+                    <button type="button"  class="btn btn-warning me-3 rounded-pill" (click)="goToEditStudent(student._id)" *ngIf="user.role =='admin'">Update</button>
+                    <button type="button" class="btn btn-danger rounded-pill" (click)="deleteStudent(student._id)" *ngIf="user.role =='admin'">Delete</button>
+                    
+
+                    <button type="button"  class="btn btn-success ms-3 me-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#addNoteModal"
+                    (click)="evaluate(student._id)" *ngIf="user.role =='teacher'">Evaluate</button>
+
+                    <div class="modal fade" id="addNoteModal" tabindex="-1" aria-labelledby="addNoteModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="addNoteModalLabel">Evaluate Student</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <form [formGroup]="addNoteForm">
+                              <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label" style="margin-left: -91%;">Note:</label>
+                                <input type="text" class="form-control" id="recipient-name" formControlName="note">
+                              </div>
+                              <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label" style="margin-left: -83%;">Evaluation:</label>
+                                <input type="text" class="form-control" id="recipient-name" formControlName="evaluation">
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" (click)="addEvaluationNote()">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

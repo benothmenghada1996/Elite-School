@@ -1,0 +1,121 @@
+<app-banner b="Edit Profile"></app-banner>
+<!-- EditProfile Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Edit</h6>
+            <h1 class="mb-5">Edit User Profile</h1>
+        </div>
+        <div class="row g-4"  style="margin-left: 22%;">
+            <div class="col-lg-9 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
+                <form [formGroup]="editProfileForm">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input input type="text" class="form-control" [(ngModel)]="user.firstName" readonly formControlName="firstName" placeholder="Fist Name" >
+                                <label for="firstName">First Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control"  [(ngModel)]="user.lastName"  readonly formControlName="lastName" placeholder="Last Name" >
+                                <label for="lastName">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" [(ngModel)]="user.email" formControlName="email" placeholder="Email">
+                                <label for="email">Email</label>
+                            </div>
+                            <div *ngIf="editProfileForm.controls['email'].invalid && (editProfileForm.controls['email'].touched 
+                            || editProfileForm.controls['email'].dirty)">
+                                <div *ngIf="editProfileForm.controls['email'].errors.required" class="text-danger">
+                                    Email is required
+                                </div>
+                                <div *ngIf="editProfileForm.controls['email'].errors.email" class="text-danger">
+                                    Please enter a valid email.
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" [(ngModel)]="user.tel" formControlName="tel" placeholder="Tel">
+                                <label for="tel">Tel</label>
+                            </div>
+                            <div *ngIf="editProfileForm.controls['tel'].invalid && (editProfileForm.controls['tel'].touched 
+                            || editProfileForm.controls['tel'].dirty)">
+                                <div *ngIf="editProfileForm.controls['tel'].errors.required" class="text-danger">
+                                    Tel is required
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" [(ngModel)]="user.adress" formControlName="adress" placeholder="Adress">
+                                <label for="adress">Adress</label>
+                            </div>
+                            <div *ngIf="editProfileForm.controls['adress'].invalid && (editProfileForm.controls['adress'].touched 
+                            || editProfileForm.controls['adress'].dirty)">
+                                <div *ngIf="editProfileForm.controls['adress'].errors.required" class="text-danger">
+                                    Adress is required
+                                </div>
+                                <div *ngIf="editProfileForm.controls['adress'].errors.minlength" class="text-danger">
+                                    Adress must have at least 5 chars
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6"  *ngIf ="isEdit('Parent',[(userId)])">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" [(ngModel)]="user.sonTel" formControlName="sonTel" placeholder="Your Son Tel">
+                                <label for="sonTel">Your Son Tel</label>
+                            </div>
+                            <div *ngIf="editProfileForm.controls['sonTel'].invalid && (editProfileForm.controls['sonTel'].touched || editProfileForm.controls['sonTel'].dirty)">
+                                <div *ngIf="editProfileForm.controls['sonTel'].errors.required" class="text-danger">
+                                  Your Son Tel is required
+                                </div>
+                           </div>
+                        </div>
+
+                        <div class="col-md-6" *ngIf ="isEdit('Teacher',[(userId)])">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" [(ngModel)]="user.speciality" formControlName="speciality" placeholder="">
+                                <label for="speciality">Speciality</label>
+                            </div>
+                            <div *ngIf="editProfileForm.controls['speciality'].invalid && (editProfileForm.controls['speciality'].touched 
+                                || editProfileForm.controls['speciality'].dirty)">
+                                <div *ngIf="editProfileForm.controls['speciality'].errors.required" class="text-danger">
+                                    Speciality is required
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12" style="margin-top: -5px;"  *ngIf="isEdit('Teacher',[(userId)])">
+                            <div class="form-group" style="visibility: hidden;">
+                                <input type="file" class="form-control" #pdfPicker (change)="onPdfSelected($event)">
+                            </div>
+                            <div class="text-center">
+                               <button type="button" class="btn btn-primary" (click)="pdfPicker.click()">Upload Your CV</button>
+                            </div>
+                        </div>
+                        <div class="col-12" *ngIf="isEdit('Student',[(userId)])">
+                            <div class="form-group" style="visibility: hidden;">
+                                <input type="file" class="form-control" #imagePicker (change)="onImageSelected($event)">
+                            </div>
+                            <div class="text-center">
+                                <button type="button"  class="btn btn-primary"  (click)="imagePicker.click()">Select Your Avatar</button>
+                            </div>
+                        </div>
+                        <div class="mt-3 mb-3">
+                            <span style="color: red;">{{errorMsg}}</span>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100 py-3 mt-2" (click)="editProfile()" type="submit">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- EditProfile End -->

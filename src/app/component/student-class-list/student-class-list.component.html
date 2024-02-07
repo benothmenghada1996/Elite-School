@@ -1,0 +1,19 @@
+<div class="row g-4 justify-content-center mt-3" >
+    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="course-item bg-light">
+            <div class=" p-4 pb-0">
+                <h4 class=" text-center text-primary">Students List For : {{class.name}}</h4>
+                <div class="text-center mb-3 mt-3">
+                    <small class="fa fa-star text-primary"></small>
+                    <small class="fa fa-star text-primary"></small>
+                    <small class="fa fa-star text-primary"></small>
+                    <small class="fa fa-star text-primary"></small>
+                    <small class="fa fa-star text-primary"></small>
+                </div> 
+                <div *ngFor="let student of students; let i = index">
+                    <h6 class="mb-4 text-center" >{{i + 1}}- {{student.firstName}} {{student.lastName}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

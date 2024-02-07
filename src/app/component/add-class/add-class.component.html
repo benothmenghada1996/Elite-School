@@ -1,0 +1,33 @@
+
+<!-- Add Course Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h4 class="section-title bg-white text-center text-primary px-3 mb-5">{{title}}</h4>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-6 col-md-12 wow fadeInUp" data-wow-delay="0.5s" style="margin-left: 25%;">
+                <form #addOrEditClassForm="ngForm" (ngSubmit)="addOrEditClass()">
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name ="name" [(ngModel)]="class.name" placeholder="Name">
+                                <label for="name">Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name ="description" [(ngModel)]="class.description" placeholder="Description">
+                                <label for="description">Description</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100 py-3" [disabled]="addOrEditClassForm.invalid" type="submit">OK</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add Class  End -->

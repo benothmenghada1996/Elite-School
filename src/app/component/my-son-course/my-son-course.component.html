@@ -1,0 +1,67 @@
+<div class="site-section ">
+    <div class="container">
+      <div class="row">
+        <div class="text-center mt-5">
+          <div class="widget-next-match">
+            <div class="container-xxl py-5 justify-content-center col-lg-12 mb-3">
+                <div class="container">
+                    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <h6 class="section-title bg-white text-center text-primary px-3">Search</h6>
+                        <h1 class="mb-5"> Your Son Courses</h1>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-lg-6 col-md-6 " data-wow-delay="0.5s" style="margin-left: 25%;">
+                            <form #searchForm="ngForm" (ngSubmit)="search()">
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" name ="sonTel" [(ngModel)]="user.sonTel">
+                                            <label for="tel">Your Son Phone Number</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100 py-3 mt-2" type="submit">OK</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+              <h4 class=" text-center text-primary mb-5 mt-5" *ngIf="courses.length > 0">{{mySon[0]?.firstName}} {{mySon[0]?.lastName}}'s Courses</h4>
+              <div class="col-lg-8" style="margin-left: 16%;">
+                <table class="table custom-table" *ngIf="courses.length > 0">
+                  <thead>
+                    <tr>
+                      <th>Course</th>
+                      <th>Duration</th>
+                      <th>Class</th>
+                      <th>Teacher</th>
+                      <th>Note</th>
+                      <th>Evaluation</th>
+                      <!-- <th>Action</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let course of courses">
+                      <td>{{course.name}}</td>
+                      <td>{{course.duration}}</td>
+                      <td>{{class.name}}</td>
+                      <td>{{course.teacher?.firstName}} {{course.teacher?.lastName}}</td>
+                      <td [ngStyle]="{color:noteResult(course.evaluation.note)}" *ngIf="course.evaluation"> <strong>{{course.evaluation.note}}</strong></td>
+                      <td [ngStyle]="{color:evalResult(course.evaluation.evaluation)}" *ngIf="course.evaluation"><strong>{{course.evaluation.evaluation}}</strong></td>
+                      <!-- <td>
+                        <button type="button" class="btn  btn-primary me-3 rounded-pill " (click)="displayCourse(course._id)">Display</button>
+                      </td> -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <strong *ngIf="!isFound">
+                  Courses Not Found
+              </strong>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<app-banner b="Login"></app-banner>
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Welcome to Kiddos</h6>
+            <h1 class="mb-5">Sign-in Here</h1>
+        </div>
+        <div class="row g-4" >
+            <div class="col-lg-6 col-md-6 wow fadeInUp" >
+                <img class="img-fluid rounded position-relative" src="assets/img/login.jpg" alt="">
+            </div>
+            <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.5s" >
+                <form #loginForm="ngForm" (ngSubmit)="login()">
+                    <div class="row g-3">
+                        <div  class="col-12" style="margin-bottom: 8%; margin-top: 20px;">
+                            <div class="form-floating">
+                                <!-- <span class="input-group-text" style="width: 20px;">
+                                    <i class="fa fa-phone"></i>
+                                </span> -->
+                            <input
+                            type="number"
+                            class="form-control"
+                            name="tel"
+                            #tel="ngModel"
+                            [(ngModel)]="user.tel" placeholder="Tel"
+                            [ngClass]="{ 'is-invalid': loginForm.submitted && tel.invalid}" required tel/>
+                            <label for="tel">Telephone</label>
+                            <div *ngIf="loginForm.submitted && tel.invalid" class="invalid-feedback" >
+                                <p *ngIf="tel.errors.required">Tel is required</p>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-12" style="margin-bottom: 8%;">
+                            <div class="form-floating">
+                                <input
+                                type="password"
+                                class="form-control"
+                                name="password"
+                                #pwd="ngModel"
+                                [(ngModel)]="user.pwd"
+                                placeholder="password"
+                                [ngClass]="{ 'is-invalid': loginForm.submitted && pwd.invalid }" required/>
+                                <label for="pwd">Password</label>
+                                  <div *ngIf="loginForm.submitted && pwd.invalid"
+                                  class="invalid-feedback">
+                                    <p *ngIf="pwd.errors.required">Password is required</p>
+                                  </div>
+                            </div>
+                        </div>
+                        <span style="color: red;">{{errorMsg}}</span>
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100 py-3"  type="submit" [disabled]="!loginForm.valid">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

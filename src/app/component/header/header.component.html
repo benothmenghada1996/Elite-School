@@ -1,0 +1,51 @@
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+  <a href="" class="navbar-brand d-flex align-items-center  px-lg-5">
+      <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>Elite School</h2>
+  </a>
+  <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class=" d-flex align-items-center"  *ngIf="isLoggedIn() && (user.role=='parent' || user.role=='teacher')">
+    <strong class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2" style="size: 300px;"></i>Hello - {{user.firstName}} {{user.lastName}}</strong>
+  </div> 
+  <div class=" d-flex align-items-center" *ngIf="isLoggedIn() && (user.role=='student' || user.role=='admin')">
+    <img [src]="user.avatar" alt="User Icon" class="border rounded-circle p-auto me-2" style="width: 50px; height: 50px;">
+    <strong>Hello - {{user.firstName}} {{user.lastName}}</strong>
+  </div>
+  
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="navbar-nav ms-auto p-4 p-lg-0">
+          <a routerLink="" class="nav-item nav-link active">Home</a>
+          <a routerLink="courses" class="nav-item nav-link" *ngIf="isLoggedIn() && user.role!=='parent'">Courses</a>
+          <a routerLink="sonCourses" class="nav-item nav-link" *ngIf="isLoggedIn() && user.role =='parent'">Courses</a>
+          <a routerLink="searchTeacher" class="nav-item nav-link">Teachers</a>
+          <div class="nav-item dropdown" *ngIf ="!isLoggedIn()">
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Signup</a>
+              <div class="dropdown-menu fade-down m-0">
+                  <!-- <a routerLink="signupAdmin" class="dropdown-item">Signup Admin</a> -->
+                  <a routerLink="signupTeacher" class="dropdown-item">Signup Teacher</a>
+                  <a routerLink="signupStudent" class="dropdown-item">Signup Student</a>
+                  <a routerLink="signupParent" class="dropdown-item">Signup Parent</a>
+              </div>
+          </div>
+          <a routerLink="admin" class="nav-item nav-link" *ngIf="isLoggedIn() && user.role=='admin'">Dashboard</a>
+          <a routerLink="admin" class="nav-item nav-link" *ngIf="isLoggedIn() && user.role=='teacher'">Dashboard</a>
+          <a routerLink="admin" class="nav-item nav-link" *ngIf="isLoggedIn() && user.role=='student'">Dashboard</a>
+          <a routerLink="login" class="nav-item nav-link" *ngIf="!isLoggedIn()">Login</a>
+          <a routerLink="" class="nav-item nav-link" *ngIf ="isLoggedIn()" (click)="logOut()">LOGOUT <i class="fa fa-arrow-right "></i></a>
+          <div class=" btn-primary d-lg-block" style="margin-top:-3%;" *ngIf="result">
+            <img [src]="result.icon" alt="Weather Icon">
+            <strong class="" style="margin-top: -18%; margin-left: -8%;">{{result.temperature}}°C</strong>
+            <div style="display: flex; align-items: center; margin-top: -8%; margin-bottom:5px; margin-left: 22%;" *ngIf="timeResult">
+              <i class="fas fa-clock" style="font-size: 28px; color: rgb(62, 62, 62);"></i>
+              <strong style="font-size: 17px; margin-left: 3px; color: rgb(30, 29, 29);">{{timeResult}}</strong>
+            </div>
+            <!-- <strong style="margin-top: -18%; margin-left: 10%;">{{timeResult}}</strong> -->
+          </div>
+         
+      </div>
+  </div>
+</nav>
+<!-- Navbar End -->
+

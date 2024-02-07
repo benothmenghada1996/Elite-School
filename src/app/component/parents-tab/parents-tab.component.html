@@ -1,0 +1,37 @@
+<div class="site-section ">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center mt-5">
+          <div class="widget-next-match">
+            <table class="table custom-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Tel</th>
+                  <th>Email</th>
+                  <th>Adress</th>
+                  <th>Son Tel</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let parent of parents">
+                  <td>{{parent._id}}</td>
+                  <td>{{parent.firstName}}</td>
+                  <td>{{parent.lastName}}</td>
+                  <td>{{parent.tel}}</td>
+                  <td>{{parent.email}}</td>
+                  <td>{{parent.adress}}</td>
+                  <td>{{parent.sonTel}}</td>
+                  <td> <button type="button"  class="btn  btn-primary ms-3 me-3 rounded-pill" (click)="goToEditParent(parent._id)">Update</button>
+                       <button type="button" class="btn btn-danger rounded-pill" (click)="deleteParent(parent._id)">Delete</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
